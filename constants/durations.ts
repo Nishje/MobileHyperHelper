@@ -1,0 +1,1 @@
+export const HEY_INTERVAL_DURATION = 400;
