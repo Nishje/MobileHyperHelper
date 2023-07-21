@@ -5,19 +5,28 @@ import {
     TouchableOpacity,
     StyleSheet,
     Animated,
+    Easing,
 } from "react-native";
 import { textColor } from "../constants/textColor";
-import { HEY_INTERVAL_DURATION } from "../constants/durations";
+import {
+    HEY_INTERVAL_DURATION,
+    HEY_SHAKE_DURATION,
+    HEY_SHAKE_WAIT_DURATION,
+} from "../constants/durations";
 import HeyText from "../components/HeyText";
+import { useRouter } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const AMOUNT_OF_HEYS_AT_ONCE = 10;
 
 export default function HeyAnimation() {
+    const router = useRouter();
     const [showMultipleHey, setShowMultipleHey] = useState(true);
     const [heys, setHeys] = useState<number[]>([]);
     const [keyCount, setKeyCount] = useState(0);
 
     const fadeAnim = useRef(new Animated.Value(1)).current;
+    const shakeAnim = useRef(new Animated.Value(0)).current;
 
     useEffect(() => {
         if (showMultipleHey) {
@@ -40,6 +49,12 @@ export default function HeyAnimation() {
         }
     }, [keyCount, showMultipleHey]);
 
+    useEffect(() => {
+        if (showMultipleHey) {
+            startShakeAnimation();
+        }
+    }, [showMultipleHey]);
+
     const handleScreenTouch = () => {
         setShowMultipleHey(false);
         fadeOutHeys();
@@ -53,17 +68,44 @@ export default function HeyAnimation() {
         }).start();
     };
 
-    const handleReset = () => {
-        setShowMultipleHey(true);
-        Animated.timing(fadeAnim, {
-            toValue: 1,
-            duration: HEY_INTERVAL_DURATION / 2,
-            useNativeDriver: true,
-        }).start();
+    const redirectToHome = () => {
+        AsyncStorage.setItem("hasOpenedApp", "true");
+        router.replace("/");
     };
 
     const removeHey = (id: number) => {
         setHeys((prevHeys) => prevHeys.filter((item) => item !== id));
+    };
+
+    const startShakeAnimation = () => {
+        Animated.loop(
+            Animated.sequence([
+                Animated.timing(shakeAnim, {
+                    toValue: 0,
+                    duration: HEY_SHAKE_WAIT_DURATION,
+                    easing: Easing.linear,
+                    useNativeDriver: true,
+                }),
+                Animated.timing(shakeAnim, {
+                    toValue: 10,
+                    duration: HEY_SHAKE_DURATION,
+                    easing: Easing.linear,
+                    useNativeDriver: true,
+                }),
+                Animated.timing(shakeAnim, {
+                    toValue: -10,
+                    duration: HEY_SHAKE_DURATION,
+                    easing: Easing.linear,
+                    useNativeDriver: true,
+                }),
+                Animated.timing(shakeAnim, {
+                    toValue: 0,
+                    duration: HEY_SHAKE_DURATION,
+                    easing: Easing.linear,
+                    useNativeDriver: true,
+                }),
+            ])
+        ).start();
     };
 
     const heyTexts = [];
@@ -88,13 +130,20 @@ export default function HeyAnimation() {
             <TouchableOpacity
                 activeOpacity={1}
                 style={styles.animationContainer}
-                onPress={showMultipleHey ? handleScreenTouch : handleReset}>
+                onPress={showMultipleHey ? handleScreenTouch : redirectToHome}>
                 {showMultipleHey ? (
                     <View>{heyTexts}</View>
                 ) : (
-                    <View style={styles.centeredText}>
+                    <Animated.View
+                        style={[
+                            styles.centeredText,
+                            { transform: [{ translateX: shakeAnim }] },
+                        ]}>
                         <Text style={styles.heyTextCentered}>Hey</Text>
-                    </View>
+                    </Animated.View>
+                    // <View style={styles.centeredText}>
+                    //     <Text style={styles.heyTextCentered}>Hey</Text>
+                    // </View>
                 )}
             </TouchableOpacity>
         </View>
