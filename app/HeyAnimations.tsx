@@ -7,7 +7,6 @@ import {
     Animated,
     Easing,
 } from "react-native";
-import { textColor } from "../constants/textColor";
 import {
     HEY_INTERVAL_DURATION,
     HEY_SHAKE_DURATION,

@@ -1,8 +1,7 @@
 import { useRef, useEffect } from "react";
 import { Animated, Dimensions, StyleSheet } from "react-native";
 import { HEY_INTERVAL_DURATION } from "../constants/durations";
-import { textColor } from "../constants/textColor";
-
+import colors from "../constants/Colors";
 interface HeyTextProps {
     id: number;
     removeHey: (id: number) => void;
@@ -43,6 +42,6 @@ const styles = StyleSheet.create({
         fontSize: 32,
         fontWeight: "bold",
         marginHorizontal: 10,
-        color: textColor,
+        color: colors.dark.text,
     },
 });

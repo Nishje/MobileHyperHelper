@@ -1,10 +1,10 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import Welcome from "../components/Welcome";
-import { textColor } from "../constants/textColor";
 import { Link, useRouter } from "expo-router";
 import { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import colors from "../constants/Colors";
+import { Text } from "../components/Themed";
 
 export default function App() {
     const router = useRouter();
@@ -15,6 +15,14 @@ export default function App() {
             }
         });
     }, []);
+    const resetLocalStorage = async () => {
+        try {
+            await AsyncStorage.clear();
+            console.log("LocalStorage data cleared.");
+        } catch (error) {
+            console.error("Error clearing LocalStorage:", error);
+        }
+    };
     return (
         <View style={styles.container}>
             <Welcome />
@@ -29,7 +37,11 @@ export default function App() {
                     style={styles.link}>
                     Login
                 </Link>
+                {/* button */}
             </View>
+            <TouchableOpacity onPress={resetLocalStorage}>
+                <Text style={styles.link}>Temp Reset LocalStorage</Text>
+            </TouchableOpacity>
         </View>
     );
 }

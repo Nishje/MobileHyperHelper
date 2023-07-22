@@ -1,6 +1,5 @@
-import { Text, View, StyleSheet } from "react-native";
-import { textColor } from "../constants/textColor";
-import HeyAnimation from "../app/HeyAnimations";
+import { Text, StyleSheet } from "react-native";
+import colors from "../constants/Colors";
 
 export default function Welcome() {
     return (
@@ -16,10 +15,10 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: "bold",
         marginBottom: 20,
-        color: textColor,
+        color: colors.dark.text,
     },
     text: {
         fontSize: 18,
-        color: textColor,
+        color: colors.dark.text,
     },
 });

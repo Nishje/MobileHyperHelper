@@ -1,5 +1,4 @@
 import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
-import { textColor } from "../constants/textColor";
 import { TextInput } from "react-native-gesture-handler";
 import { Link } from "expo-router";
 import colors from "../constants/Colors";
