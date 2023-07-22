@@ -16,6 +16,7 @@ import {
 import HeyText from "../components/HeyText";
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import colors from "../constants/Colors";
 
 const AMOUNT_OF_HEYS_AT_ONCE = 10;
 
@@ -141,9 +142,6 @@ export default function HeyAnimation() {
                         ]}>
                         <Text style={styles.heyTextCentered}>Hey</Text>
                     </Animated.View>
-                    // <View style={styles.centeredText}>
-                    //     <Text style={styles.heyTextCentered}>Hey</Text>
-                    // </View>
                 )}
             </TouchableOpacity>
         </View>
@@ -155,7 +153,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#121212",
+        backgroundColor: colors.dark.background,
     },
     animationContainer: {
         position: "absolute",
@@ -166,18 +164,18 @@ const styles = StyleSheet.create({
     },
     textContainer: {
         flexDirection: "row",
-        color: textColor,
+        color: colors.dark.text,
     },
     heyTextCentered: {
         fontSize: 32,
         fontWeight: "bold",
         marginHorizontal: 10,
-        color: textColor,
+        color: colors.dark.text,
     },
     centeredText: {
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        color: textColor,
+        color: colors.dark.text,
     },
 });

@@ -1,14 +1,13 @@
 import { View, StyleSheet } from "react-native";
 import Welcome from "../components/Welcome";
 import { textColor } from "../constants/textColor";
-import { Link, Redirect, useRouter } from "expo-router";
-import HeyAnimation from "./HeyAnimations";
-import { useEffect, useState } from "react";
+import { Link, useRouter } from "expo-router";
+import { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import colors from "../constants/Colors";
 
 export default function App() {
     const router = useRouter();
-    // const [showMultipleHey, setShowMultipleHey] = useState(true);
     useEffect(() => {
         AsyncStorage.getItem("hasOpenedApp").then((value: string | null) => {
             if (value !== "true") {
@@ -31,9 +30,6 @@ export default function App() {
                     Login
                 </Link>
             </View>
-            {/* <View style={styles.animationContainer}>
-                <HeyAnimation />
-            </View> */}
         </View>
     );
 }
@@ -41,23 +37,23 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#121212",
+        backgroundColor: colors.dark.background,
         padding: 20,
         alignItems: "center",
         justifyContent: "center",
     },
     title: {
-        color: textColor,
+        color: colors.dark.text,
         fontSize: 24,
         fontWeight: "bold",
         marginBottom: 20,
     },
     link: {
-        color: textColor,
+        color: colors.dark.text,
         fontSize: 18,
         margin: 10,
         padding: 10,
-        backgroundColor: "#00ACC1",
+        backgroundColor: colors.dark.tint,
         borderRadius: 5,
     },
     buttonContainer: {

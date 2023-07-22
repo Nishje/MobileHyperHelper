@@ -6,7 +6,7 @@ import {
     Text,
     StyleSheet,
 } from "react-native";
-import { textColor } from "../constants/textColor";
+import colors from "../constants/Colors";
 
 export default function Register() {
     return (
@@ -31,7 +31,7 @@ export default function Register() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#121212",
+        backgroundColor: colors.dark.background,
         padding: 20,
         alignItems: "center",
         justifyContent: "center",
@@ -40,29 +40,29 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: "bold",
         marginBottom: 20,
-        color: textColor,
+        color: colors.dark.text,
     },
     text: {
         fontSize: 18,
-        color: textColor,
+        color: colors.dark.text,
     },
     input: {
         fontSize: 18,
-        color: textColor,
+        color: colors.dark.text,
         border: "1px solid #B2EBF2",
         borderRadius: 5,
     },
     button: {
         fontSize: 18,
-        color: textColor,
+        color: colors.dark.text,
         borderRadius: 5,
-        backgroundColor: "#00ACC1",
+        backgroundColor: colors.dark.tint,
         padding: 10,
         margin: 10,
     },
     link: {
         fontSize: 12,
-        color: textColor,
+        color: colors.dark.text,
         margin: 10,
         textDecorationLine: "underline",
     },
