@@ -11,11 +11,12 @@ import {
     HEY_INTERVAL_DURATION,
     HEY_SHAKE_DURATION,
     HEY_SHAKE_WAIT_DURATION,
-} from "../constants/durations";
-import HeyText from "../components/HeyText";
+} from "../../constants/numbers";
+import HeyText from "../../components/HeyText";
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import colors from "../constants/Colors";
+import colors from "../../constants/Colors";
+import { LOGGED_OUT_URL } from "../../constants/links";
 
 const AMOUNT_OF_HEYS_AT_ONCE = 10;
 
@@ -70,7 +71,7 @@ export default function HeyAnimation() {
 
     const redirectToHome = () => {
         AsyncStorage.setItem("hasOpenedApp", "true");
-        router.replace("/");
+        router.replace(`/${LOGGED_OUT_URL}`);
     };
 
     const removeHey = (id: number) => {
