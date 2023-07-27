@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import { Animated, Dimensions, StyleSheet } from "react-native";
-import { HEY_INTERVAL_DURATION } from "../constants/durations";
+import { HEY_INTERVAL_DURATION } from "../constants/numbers";
 import colors from "../constants/Colors";
 interface HeyTextProps {
     id: number;
