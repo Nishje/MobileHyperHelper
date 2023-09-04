@@ -1,8 +1,9 @@
 import { StyleSheet, View, Text } from "react-native";
 import colors from "../../constants/Colors";
 import { useEffect, useState } from "react";
-import { BASE_URL, LOGGED_IN_URL } from "../../constants/links";
+import { LOGGED_IN_URL } from "../../constants/links";
 import { Link, useRouter } from "expo-router";
+import { makeApiRequest } from "../../constants/makeRequest";
 
 interface FetchedData {
     name: string | null;
@@ -13,11 +14,7 @@ export default function HomeScreen() {
     const [userName, setUserName] = useState("");
 
     const getUserName = async () => {
-        const response: Response = await fetch(`${BASE_URL}/users/me`, {
-            method: "GET",
-            credentials: "include",
-        });
-        const data: FetchedData = await response.json();
+        const data = await makeApiRequest("/users/me", "GET");
         if (data.name) {
             setUserName(data.name);
         } else {
