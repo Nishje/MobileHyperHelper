@@ -33,7 +33,7 @@ export default function Checkbox({
 
 const styles = StyleSheet.create({
     container: {
-        width: "30%",
+        width: "80%",
         backgroundColor: colors.dark.background,
         borderColor: colors.dark.tint,
     },
